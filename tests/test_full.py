@@ -1,23 +1,15 @@
-import json
-import os
 import unittest
 from .gen_tiles import genTiles
+from .utils import load_json, json_str
 
 
 class TestFull(unittest.TestCase):
 
-    def _load_json(self, file_name):
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        file_path = os.path.join(dir_path, 'fixtures', file_name)
-        with open(file_path, 'r') as json_file:
-            return json.load(json_file)
-
     def _tiles_equal(self, inputFile, expectedFile, maxZoom=0,
                      maxPoints=10000):
-        tiles = genTiles(self._load_json(inputFile), maxZoom, maxPoints)
-        expected = self._load_json(expectedFile)
-        self.assertEqual(json.dumps(tiles, sort_keys=True),
-                         json.dumps(expected, sort_keys=True))
+        tiles = genTiles(load_json(inputFile), maxZoom, maxPoints)
+        expected = load_json(expectedFile)
+        self.assertEqual(json_str(tiles), json_str(expected))
 
     def test_tiles_us_states(self):
         self._tiles_equal('us-states.json', 'us-states-tiles.json', 7, 200)
@@ -41,13 +33,12 @@ class TestFull(unittest.TestCase):
         self.assertTrue('not a valid GeoJSON object' in str(context.exception))
 
     def test_empty_geojson(self):
-        self.assertEqual(
-            json.dumps(genTiles(self._load_json('empty.json'))), '{}')
+        self.assertEqual(json_str(genTiles(load_json('empty.json'))), '{}')
 
     def test_null_geometry(self):
         # should ignore features with null geometry
-        self.assertEqual(json.dumps(genTiles(
-            self._load_json('feature-null-geometry.json'))), '{}')
+        self.assertEqual(json_str(genTiles(
+            load_json('feature-null-geometry.json'))), '{}')
 
 
 if __name__ == '__main__':

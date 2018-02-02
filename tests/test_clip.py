@@ -1,6 +1,6 @@
-import json
 import unittest
 from geojsonvt.clip import clip
+from .utils import closed, integerize, json_str
 
 
 class TestClip(unittest.TestCase):
@@ -8,24 +8,6 @@ class TestClip(unittest.TestCase):
              30, 30, 0, 50, 30, 0, 50, 40, 0, 25, 40, 0, 25, 50, 0, 0, 50, 0,
              0, 60, 0, 25, 60, 0]
     GEOM2 = [0, 0, 0, 50, 0, 0, 50, 10, 0, 0, 10, 0]
-
-    def _integerize(self, obj):
-        if isinstance(obj, float):
-            return int(obj)
-
-        if isinstance(obj, dict):
-            result = {}
-            for (k, v) in obj.items():
-                result[k] = self._integerize(v)
-            return result
-
-        if isinstance(obj, list):
-            return [self._integerize(item) for item in obj]
-
-        return obj
-
-    def _closed(self, geometry):
-        return [geometry + geometry[0:3]]
 
     def test_clip_polylines(self):
         clipped = clip([
@@ -81,13 +63,12 @@ class TestClip(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(json.dumps(self._integerize(clipped), sort_keys=True),
-                         json.dumps(expected, sort_keys=True))
+        self.assertEqual(json_str(integerize(clipped)), json_str(expected))
 
     def test_clip_polygons(self):
         clipped = clip([
             {
-                'geometry': self._closed(TestClip.GEOM1),
+                'geometry': closed(TestClip.GEOM1),
                 'type': 'Polygon',
                 'tags': 1,
                 'minX': 0,
@@ -96,7 +77,7 @@ class TestClip(unittest.TestCase):
                 'maxY': 60
             },
             {
-                'geometry': self._closed(TestClip.GEOM2),
+                'geometry': closed(TestClip.GEOM2),
                 'type': 'Polygon',
                 'tags': 2,
                 'minX': 0,
@@ -135,8 +116,7 @@ class TestClip(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(json.dumps(self._integerize(clipped), sort_keys=True),
-                         json.dumps(expected, sort_keys=True))
+        self.assertEqual(json_str(integerize(clipped)), json_str(expected))
 
     def test_clip_points(self):
         clipped = clip([
@@ -174,5 +154,4 @@ class TestClip(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(json.dumps(self._integerize(clipped), sort_keys=True),
-                         json.dumps(expected, sort_keys=True))
+        self.assertEqual(json_str(integerize(clipped)), json_str(expected))
