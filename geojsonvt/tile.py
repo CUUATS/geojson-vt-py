@@ -115,7 +115,7 @@ def rewind(ring, clockwise):
 
     if (area > 0) == clockwise:
         rlen = len(ring)
-        for i in range(0, math.ceil(rlen / 2), 2):
+        for i in range(0, int(math.ceil(rlen / 2)), 2):
             x = ring[i]
             y = ring[i + 1]
             ring[i] = ring[rlen - 2 - i]
