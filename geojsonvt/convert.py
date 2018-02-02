@@ -59,7 +59,7 @@ def convertFeature(features, geojson, tolerance):
         for geom in geojson['geometry']['geometries']:
             convertFeature(features, {
                 'geometry': geom,
-                'properties': geojson['properties']
+                'properties': geojson.get('properties', None)
             }, tolerance)
         return
 
@@ -67,7 +67,8 @@ def convertFeature(features, geojson, tolerance):
         raise ValueError('Input data is not a valid GeoJSON object.')
 
     features.append(createFeature(
-        geojson.get('id', None), ftype, geometry, geojson['properties']))
+        geojson.get('id', None), ftype, geometry,
+        geojson.get('properties', None)))
 
 
 def convertPoint(coords, out):
