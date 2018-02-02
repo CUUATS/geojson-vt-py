@@ -34,6 +34,6 @@ def transformTile(tile, extent):
 
 def transformPoint(x, y, extent, z2, tx, ty):
     return [
-        round(extent * (x * z2 - tx)),
-        round(extent * (y * z2 - ty))
+        int(round(extent * (x * z2 - tx))),
+        int(round(extent * (y * z2 - ty)))
     ]
