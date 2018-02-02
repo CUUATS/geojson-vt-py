@@ -140,6 +140,8 @@ def clipLine(geom, newGeom, k1, k2, axis, isPolygon):
 
 def clipLines(geom, newGeom, k1, k2, axis, isPolygon):
     for part in geom:
+        if not isinstance(part, Geometry):
+            part = Geometry(part)
         clipLine(part, newGeom, k1, k2, axis, isPolygon)
 
 
