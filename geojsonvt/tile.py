@@ -1,4 +1,6 @@
 from __future__ import division
+import math
+from .geometry import Geometry
 
 
 def createTile(features, z2, tx, ty, tolerance, noSimplify):
@@ -42,7 +44,7 @@ def createTile(features, z2, tx, ty, tolerance, noSimplify):
 def addFeature(tile, feature, tolerance, noSimplify):
     geom = feature['geometry']
     ftype = feature['type']
-    simplified = []
+    simplified = Geometry()
 
     if ftype == 'Point' or ftype == 'MultiPoint':
         for i in range(0, len(geom), 3):
@@ -87,7 +89,7 @@ def addLine(result, geom, tile, tolerance, noSimplify, isPolygon, isOuter):
         tile['numPoints'] += int(len(geom) / 3)
         return
 
-    ring = []
+    ring = Geometry()
 
     for i in range(0, len(geom), 3):
         if noSimplify or geom[i + 2] > sqTolerance:
@@ -111,12 +113,12 @@ def rewind(ring, clockwise):
         area += (ring[i] - ring[j]) * (ring[i + 1] + ring[j + 1])
         j = i
 
-    if area > 0 == clockwise:
+    if (area > 0) == clockwise:
         rlen = len(ring)
-        for i in range(0, rlen / 2, 2):
+        for i in range(0, math.ceil(rlen / 2), 2):
             x = ring[i]
             y = ring[i + 1]
-            ring[i] = ring[len - 2 - i]
-            ring[i + 1] = ring[len - 1 - i]
-            ring[len - 2 - i] = x
-            ring[len - 1 - i] = y
+            ring[i] = ring[rlen - 2 - i]
+            ring[i + 1] = ring[rlen - 1 - i]
+            ring[rlen - 2 - i] = x
+            ring[rlen - 1 - i] = y
