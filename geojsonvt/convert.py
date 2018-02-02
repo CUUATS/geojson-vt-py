@@ -119,5 +119,12 @@ def projectX(x):
 
 def projectY(y):
     sin = math.sin(y * math.pi / 180)
+
+    # Avoid invalid math
+    if sin == 1:
+        return 0
+    elif sin == -1:
+        return 1
+
     y2 = 0.5 - 0.25 * math.log((1 + sin) / (1 - sin)) / math.pi
     return 0 if y2 < 0 else (1 if y2 > 1 else y2)
