@@ -26,7 +26,7 @@ def convert(data, tolerance):
 
 
 def convertFeature(features, geojson, tolerance):
-    if 'geometry' not in geojson:
+    if not geojson.get('geometry', None):
         return
 
     coords = geojson['geometry'].get('coordinates', None)
