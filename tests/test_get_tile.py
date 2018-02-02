@@ -35,7 +35,7 @@ class TestGetTile(unittest.TestCase):
         self.assertEqual(json_str(features), json_str(expected))
 
         features = self.index.getTile(9, 148, 192)['features']
-        self.assertEqual(json_str(features), json_str(TestGetTile.SQUARE))
+        self.assertEqual(json_str(features), json_str(self.SQUARE))
 
         self.assertEqual(self.index.total, 37)
 

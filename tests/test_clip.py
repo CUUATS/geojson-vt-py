@@ -12,7 +12,7 @@ class TestClip(unittest.TestCase):
     def test_clip_polylines(self):
         clipped = clip([
             {
-                'geometry': TestClip.GEOM1,
+                'geometry': self.GEOM1,
                 'type': 'LineString',
                 'tags': 1,
                 'minX': 0,
@@ -21,7 +21,7 @@ class TestClip(unittest.TestCase):
                 'maxY': 60
             },
             {
-                'geometry': TestClip.GEOM2,
+                'geometry': self.GEOM2,
                 'type': 'LineString',
                 'tags': 2,
                 'minX': 0,
@@ -68,7 +68,7 @@ class TestClip(unittest.TestCase):
     def test_clip_polygons(self):
         clipped = clip([
             {
-                'geometry': closed(TestClip.GEOM1),
+                'geometry': closed(self.GEOM1),
                 'type': 'Polygon',
                 'tags': 1,
                 'minX': 0,
@@ -77,7 +77,7 @@ class TestClip(unittest.TestCase):
                 'maxY': 60
             },
             {
-                'geometry': closed(TestClip.GEOM2),
+                'geometry': closed(self.GEOM2),
                 'type': 'Polygon',
                 'tags': 2,
                 'minX': 0,
@@ -121,7 +121,7 @@ class TestClip(unittest.TestCase):
     def test_clip_points(self):
         clipped = clip([
             {
-                'geometry': TestClip.GEOM1,
+                'geometry': self.GEOM1,
                 'type': 'MultiPoint',
                 'tags': 1,
                 'minX': 0,
@@ -130,7 +130,7 @@ class TestClip(unittest.TestCase):
                 'maxY': 60
             },
             {
-                'geometry': TestClip.GEOM2,
+                'geometry': self.GEOM2,
                 'type': 'MultiPoint',
                 'tags': 2,
                 'minX': 0,
