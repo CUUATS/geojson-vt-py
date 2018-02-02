@@ -82,7 +82,6 @@ def addFeature(tile, feature, tolerance, noSimplify):
 def addLine(result, geom, tile, tolerance, noSimplify, isPolygon, isOuter):
     sqTolerance = tolerance * tolerance
 
-    # FIXME: size
     if (not noSimplify) and (
             geom.size < (sqTolerance if isPolygon else tolerance)):
         tile['numPoints'] += int(len(geom) / 3)
