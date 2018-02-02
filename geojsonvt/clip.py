@@ -17,6 +17,8 @@ def clip(features, scale, k1, k2, axis, minAll, maxAll):
 
     for feature in features:
         geometry = feature['geometry']
+        if not isinstance(geometry, Geometry):
+            geometry = Geometry(geometry)
         ftype = feature['type']
 
         minCoord = feature['minX'] if axis == 0 else feature['minY']
@@ -28,7 +30,7 @@ def clip(features, scale, k1, k2, axis, minAll, maxAll):
         elif minCoord > k2 or maxCoord < k1:
             continue
 
-        newGeometry = []
+        newGeometry = Geometry()
 
         if ftype == 'Point' or ftype == 'MultiPoint':
             clipPoints(geometry, newGeometry, k1, k2, axis)
@@ -44,7 +46,7 @@ def clip(features, scale, k1, k2, axis, minAll, maxAll):
 
         elif ftype == 'MultiPolygon':
             for part in geometry:
-                polygon = []
+                polygon = Geometry()
                 clipLines(part, polygon, k1, k2, axis, True)
                 if polygon:
                     newGeometry.append(polygon)
@@ -61,7 +63,8 @@ def clip(features, scale, k1, k2, axis, minAll, maxAll):
                 ftype = 'Point' if len(newGeometry) == 3 else 'MultiPoint'
 
             clipped.append(createFeature(
-                feature['id'], ftype, newGeometry, feature['tags']))
+                feature.get('id', None), ftype, newGeometry,
+                feature.get('tags', None)))
 
     return clipped if clipped else None
 
