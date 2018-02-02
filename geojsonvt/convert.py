@@ -29,7 +29,7 @@ def convertFeature(features, geojson, tolerance):
     if 'geometry' not in geojson:
         return
 
-    coords = geojson['geometry']['coordinates']
+    coords = geojson['geometry'].get('coordinates', None)
     ftype = geojson['geometry']['type']
     tol = tolerance * tolerance
     geometry = Geometry()
@@ -52,7 +52,7 @@ def convertFeature(features, geojson, tolerance):
 
     elif ftype == 'MultiPolygon':
         for coord in coords:
-            polygon = []
+            polygon = Geometry()
             convertLines(coord, polygon, tol, True)
             geometry.append(polygon)
 
