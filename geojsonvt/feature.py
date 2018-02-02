@@ -1,16 +1,13 @@
-import math
-
-
 def createFeature(fid, ftype, geom, tags):
     feature = {
         'id': fid or None,
         'type': ftype,
         'geometry': geom,
         'tags': tags,
-        'minX': math.inf,
-        'minY': math.inf,
-        'maxX': -math.inf,
-        'maxY': -math.inf
+        'minX': float('inf'),
+        'minY': float('inf'),
+        'maxX': -float('inf'),
+        'maxY': -float('inf')
     }
     calcBBox(feature)
     return feature
