@@ -106,7 +106,7 @@ def convertLine(ring, out, tol, isPolygon):
 
 def convertLines(rings, out, tol, isPolygon):
     for ring in rings:
-        geom = []
+        geom = Geometry()
         convertLine(ring, geom, tol, isPolygon)
         out.append(geom)
 
