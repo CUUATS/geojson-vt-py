@@ -1,3 +1,6 @@
+from __future__ import division
+
+
 def createTile(features, z2, tx, ty, tolerance, noSimplify):
     tile = {
         'features': [],

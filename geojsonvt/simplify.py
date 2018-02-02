@@ -1,3 +1,6 @@
+from __future__ import division
+
+
 def simplify(coords, first, last, sqTolerance):
     """calculate simplification data using optimized
     Douglas-Peucker algorithm"""

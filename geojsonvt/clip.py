@@ -1,3 +1,4 @@
+from __future__ import division
 from .feature import createFeature
 from .geometry import Geometry
 

@@ -1,3 +1,4 @@
+from __future__ import division
 import math
 from .convert import convert  # GeoJSON conversion and preprocessing
 from .transform import transformTile  # coordinate transformation

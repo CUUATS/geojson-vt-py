@@ -1,3 +1,4 @@
+from __future__ import division
 import math
 from .simplify import simplify
 from .feature import createFeature
