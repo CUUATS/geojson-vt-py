@@ -56,6 +56,6 @@ def shiftCoords(points, offset):
     newPoints.size = points.size
 
     for i in range(0, len(points), 3):
-        newPoints.append(points[i] + offset, points[i + 1], points[i + 2])
+        newPoints.extend([points[i] + offset, points[i + 1], points[i + 2]])
 
     return newPoints
