@@ -1,5 +1,6 @@
 from .clip import clip
 from .feature import createFeature
+from .geometry import Geometry
 
 
 def wrap(features, buf):
@@ -51,8 +52,7 @@ def shiftFeatureCoords(features, offset):
 
 
 def shiftCoords(points, offset):
-    newPoints = []
-    # FIXME: size
+    newPoints = Geometry()
     newPoints.size = points.size
 
     for i in range(0, len(points), 3):
