@@ -6,12 +6,13 @@ long_description = description
 url = 'https://github.com/CUUATS/geojson-vt-py'
 version = '0.1.0'
 
-if os.path.exists('README.md'):
+if os.path.exists('README.md') and os.path.exists('CHANGELOG.md'):
     try:
         # Use pypandoc to convert the Markdown readme to reStructuredText.
         # See: http://johnmacfarlane.net/pandoc/installing.html
         from pypandoc import convert
         long_description = convert('README.md', 'rst', format='md')
+        long_description += convert('CHANGELOG.md', 'rst', format='md')
     except ImportError:
         pass
 
