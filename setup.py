@@ -15,7 +15,7 @@ if os.path.exists('README.md'):
 
 setup(
     name='geojsonvt',
-    version='0.1',
+    version='0.1.0',
     packages=find_packages(exclude=['tests']),
     author='Matt Yoder',
     author_email='myoder@ccrpc.org',
