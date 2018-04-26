@@ -3,6 +3,8 @@ from setuptools import setup, find_packages
 
 description = 'A Python port of JS GeoJSON-VT for generating vector map tiles.'
 long_description = description
+url = 'https://github.com/CUUATS/geojson-vt-py'
+version = '0.1.0'
 
 if os.path.exists('README.md'):
     try:
@@ -15,7 +17,7 @@ if os.path.exists('README.md'):
 
 setup(
     name='geojsonvt',
-    version='0.1.0',
+    version=version,
     packages=find_packages(exclude=['tests']),
     author='Matt Yoder',
     author_email='myoder@ccrpc.org',
@@ -23,5 +25,6 @@ setup(
     long_description=long_description,
     license='ISF',
     keywords='geojson vector map tile',
-    url='https://github.com/CUUATS/geojson-vt-py',
+    url=url,
+    download_url=url + '/archive/' + version + '.tar.gz',
 )
