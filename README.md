@@ -11,7 +11,7 @@ from geojsonvt import GeoJSONVT
 with open('data.json', 'r') as json_file:
   geojson = json.load(json_file)
 
-vt = GeoJSONVT(data)
+vt = GeoJSONVT(geojson)
 vt.getTile(0, 0, 0)
 ```
 
