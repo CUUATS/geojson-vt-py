@@ -24,8 +24,14 @@ setup(
     author_email='myoder@ccrpc.org',
     description=description,
     long_description=long_description,
-    license='ISF',
+    license='ISC',
     keywords='geojson vector map tile',
     url=url,
     download_url=url + '/archive/' + version + '.tar.gz',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: ISC License (ISCL)',
+        'Topic :: Scientific/Engineering :: GIS',
+    ],
 )
